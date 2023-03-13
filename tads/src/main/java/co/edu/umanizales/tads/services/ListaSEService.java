@@ -12,19 +12,21 @@ public class ListaSEService {
     private ListSE Kids;
 
     public ListaSEService() {
-        Kids = new ListSE();
-        Kids.add(new Kid("123","Carlos",(byte)4));
-        Kids.add(new Kid("256","Mariana",(byte)3));
-        Kids.add(new Kid("789","Daniel",(byte)5));
+        this.Kids = new ListSE();
 
-        Kids.addToStart(new Kid("967","Estefania",(byte)6));
-        Kids.addKidPos(2,new Kid("459","Ximena",(byte)10));
-        Kids.DeleteKidByIdentification("123");
+        this.Kids.add(new Kid("123", "Carlos", (byte) 4));
+        this.Kids.add(new Kid("256", "Mariana", (byte) 3));
+        this.Kids.add(new Kid("789", "Daniel", (byte) 5));
+
+        Kids.addToStart(new Kid("967", "Estefania", (byte) 6));
+        //Kids.addKidPos(5,new Kid("4","Juan",(byte) 10));
     }
 
-    public Node getKids()
-    {
-        return Kids.getHead();
+    public Node getKids() {
+        return this.Kids.getHead();
+    }
+    public Node addKidPos(int pos, Kid kid) {
+        return this.Kids.addKidPos(pos, kid);
     }
 
-}
+} //FIN C_ListSEService

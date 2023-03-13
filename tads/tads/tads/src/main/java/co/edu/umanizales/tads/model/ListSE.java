@@ -5,7 +5,22 @@ import lombok.Data;
 @Data
 public class ListSE {
     private Node head;
+    /*
+    Algoritmo de adicionar al final
+    Entrada
+        un niño
+    si hay datos
+    si
+        llamo a un ayudante y le digo que se posicione en la cabeza
+        mientras en el brazo exista algo
+            pasese al siguiente
+        va estar ubicado en el ùltimo
 
+        meto al niño en un costal (nuevo costal)
+        y le digo al ultimo que tome el nuevo costal
+    no
+        metemos el niño en el costal y ese costal es la cabeza
+     */
     public void add(Kid kid){
         if(head != null){
             Node temp = head;
@@ -21,6 +36,16 @@ public class ListSE {
             head = new Node(kid);
         }
     }
+
+    /* Adicionar al inicio
+    si hay datos
+    si
+        meto al niño en un costal (nuevocostal)
+        le digo a nuevo costal que tome con su brazo a la cabeza
+        cabeza es igual a nuevo costal
+    no
+        meto el niño en un costal y lo asigno a la cabez
+     */
     public void addToStart(Kid kid){
         if(head !=null)
         {
@@ -33,16 +58,27 @@ public class ListSE {
         }
     }
 
+    /* Adicionar en posición
+    primero tengo que recorrer la lista para obtener al niño que se encuentra en esa posicion
+    ademas de obtener al niño que se encuentra atras de la posicion indicada
+    para luego con esto datos, preguntar:
+    -si exite un niño en la posicion anterior y en la posicion indicada
+        meto al niño en un costal y lo asigno en el .next del niño anterior a la posicion
+        luego al nuevo niño le aigno el punto next o el niño siguiente
+    -sino existe un niño en la posicion anterior o en la indicada
+        significa que vuelvo al nuevo niño en cabeza o lo asigno al final de la lista
+    */
     public int size() {
-        int sizeList = 0;
+        int size = 0;
         Node temp = head;
         while (temp != null) {
+            size++;
             temp = temp.getNext();
-            sizeList++;
         }
-        return sizeList;
+        return size;
     }
-    public Node addKidPos(int pos, Kid kid) {
+
+    public void addKidPos(int pos, Kid kid) {
         if (size() >= pos) {
             if (pos == 0) {
                 addToStart(kid);
@@ -58,12 +94,12 @@ public class ListSE {
         } else {
             add(kid);
         }
-        return null;
     }
-    public Node DeleteKidByIdentification(String identification) {
+
+    public void DeleteKidByIdentification(String identification) {
         Node temp = head;
         Node Nodeanterior = null;
-        while ((temp != null) && (temp.getData().getIndentification() != identification)) {
+        while (temp != null && temp.getData().getIndentification()!=(identification)) {
             Nodeanterior = temp;
             temp= temp.getNext();
         }
@@ -75,41 +111,6 @@ public class ListSE {
                 Nodeanterior.setNext(temp.getNext());
             }
         }
-        return null;
-    }
-    public Node invertir(){
-        Node anterior = null;
-        Node temp = head;
-        while (temp != null) {
-            anterior.setNext(temp);
-            temp = head.getNext();
-        }
-        temp.setNext(anterior);
-        head = temp;
-        return null;
-    }
-    public Node enviarKidFinalxLetra(String letra){
-        String option1 = letra.toLowerCase();
-        String option2 = letra.toUpperCase();
-        Node temp = head;
-        Node copyList = null;
-        Node anterior = null;
-        Node next;
-
-        for (int i = 0; i < size(); i++) {
-            while(temp != null){
-                String nameKid = temp.getData().getName();
-                String ini = nameKid.substring(0,1);
-                if ((ini == option1) || (ini == option2)){
-                    copyList.setNext(temp);
-                    next = temp.getNext();
-                    anterior.setNext(next);
-                    anterior.setNext(copyList);
-                }
-                temp = anterior;
-            }
-        }
-        return null;
     }
 
 } // fin clase
